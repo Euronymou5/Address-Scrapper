@@ -1,7 +1,7 @@
 # Address-Scrapper
 Un simple script que recaba falsas direcciones utilizando web scrapping de la web [Bestrandoms](https://www.bestrandoms.com/random-address-in-0). 
 
-El script recaba códigos de pais ISO, para facilitar el uso mediante web scrapping. Decidí utilizar un [archivo de datos csv,](https://gist.github.com/tadast/8827699) para obtener diferentes códigos iso e implementarlos como un uso aleatorio del script, aunque el usuario puede agregar uno personalizado.
+El script recaba códigos de pais ISO, para facilitar el uso mediante web scrapping. Decidí utilizar un [archivo de datos csv,](https://gist.github.com/tadast/8827699) para obtener diferentes códigos iso e implementarlos como un uso aleatorio del script, aunque se pueden agregar de manera personalizada.
 
 ````python
 csv_url = "https://gist.githubusercontent.com/tadast/8827699/raw/61b2107766d6fd51e2bd02d9f78f6be081340efc/countries_codes_and_coordinates.csv"
