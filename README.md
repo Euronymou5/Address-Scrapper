@@ -55,7 +55,7 @@ python3 main.py -code mx
 
 Guardar datos en un archivo json.
 ```
-python3 main.py --code br -save
+python3 main.py -code br -save
 ```
 
 Eleccion random del codigo iso.
