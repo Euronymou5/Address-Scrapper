@@ -1,0 +1,6 @@
+requests
+beautifulsoup4
+fake_useragent
+pandas
+colorama
+rich
