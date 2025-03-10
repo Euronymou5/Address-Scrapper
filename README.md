@@ -32,10 +32,37 @@ Instalar dependencias.
 pip install -r requirements.txt
 ```
 
-Iniciar script.
+### Ejemplos de uso
+
+> Mostrar ayuda.
+
 ```
-python main.py
-````
+python3 main.py -h
+```
+```
+usage: main.py [-h] [-code CODE] [-save]
+
+options:
+  -h, --help           show this help message and exit
+  -code CODE, -c CODE  Añadir codigo ISO personalizado.
+  -save                Guardar datos en un archivo json.
+```
+
+Ejemplo de uso basico.
+```
+python3 main.py -code mx
+```
+
+Guardar datos en un archivo json.
+```
+python3 main.py --code br -save
+```
+
+Eleccion random del codigo iso.
+```
+python3 main.py
+```
+>  De esta forma sin agregar el argumento '-code', el script seleccionara un codigo iso de manera aleatoria.
 
 ## Imagenes
 
