@@ -38,3 +38,12 @@ python main.py
 ````
 
 ## Imagenes
+
+![scrapper-gif](https://github.com/user-attachments/assets/a8829b86-4e37-4f2d-97dc-6be35afeba95)
+
+## 🌐 Contacto 🌐
+[![discord](https://img.shields.io/badge/Discord-euronymou5-a?style=plastic&logo=discord&logoColor=white&labelColor=black&color=7289DA)](https://discord.com/users/452720652500205579)
+
+![email](https://img.shields.io/badge/ProtonMail-mr.euron%40proton.me-a?style=plastic&logo=protonmail&logoColor=white&labelColor=black&color=8B89CC)
+
+[![X](https://img.shields.io/twitter/follow/Euronymou51?style=plastic&logo=X&label=%40Euronymou51&labelColor=%23000000&color=%23000000)](https://x.com/Euronymou51)
