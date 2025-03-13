@@ -40,33 +40,39 @@ pip install -r requirements.txt
 python3 main.py -h
 ```
 ```
-usage: main.py [-h] [-code CODE] [-save]
+usage: main.py [-h] [-code CODE] [-quantity QUANTITY] [-save SAVE]
 
 options:
-  -h, --help           show this help message and exit
-  -code CODE, -c CODE  Añadir codigo ISO personalizado.
-  -save                Guardar datos en un archivo json.
+  -h, --help            show this help message and exit
+  -code CODE, -c CODE   Añadir codigo ISO personalizado.
+  -quantity QUANTITY, -q QUANTITY,  Añadir cantidad de resultados.
+  -save SAVE            Guardar datos en un archivo json.
 ```
 
 Ejemplo de uso basico.
 ```
-python3 main.py -code mx
+python3 main.py -c mx
 ```
 
 Guardar datos en un archivo json.
 ```
-python3 main.py -code br -save
+python3 main.py -c br -save json
 ```
 
 Eleccion random del codigo iso.
 ```
-python3 main.py
+python3 main.py -c random
 ```
->  De esta forma sin agregar el argumento '-code', el script seleccionara un codigo iso de manera aleatoria.
+
+Modificar cantidad de resultados.
+```
+python3 main.py -q 3 -c cl
+```
 
 ## Imagenes
 
-![scrapper-gif](https://github.com/user-attachments/assets/a8829b86-4e37-4f2d-97dc-6be35afeba95)
+![scrapper-gif](https://github.com/user-attachments/assets/309037af-c60b-4a12-bd4c-841874d87162)
+
 
 ## 🌐 Contacto 🌐
 [![discord](https://img.shields.io/badge/Discord-euronymou5-a?style=plastic&logo=discord&logoColor=white&labelColor=black&color=7289DA)](https://discord.com/users/452720652500205579)
