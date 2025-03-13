@@ -18,7 +18,8 @@ import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-code", "-c", type=str, help="Añadir codigo ISO personalizado.")
-parser.add_argument("-save", action="store_true", help="Guardar datos en un archivo json.")
+parser.add_argument("-quantity", "-q", type=int, default=1, help="Añadir cantidad de resultados.")
+parser.add_argument("-save", type=str, help="Guardar datos en un archivo json.")
 args = parser.parse_args()
 
 class RainbowHighlighter(Highlighter):
@@ -67,15 +68,20 @@ def search_principal(bestrandom_url, headers, random_entry):
                         datos[campos[i]] = texto.strip()
 
         print_rich(f'\n[bold] {datos}')
-        if args.save:
+        if args.save == 'json':
             numeros_aleatorios = [random.randint(1, 9000) for _ in range(1)]
-            with open(f'datos_{numeros_aleatorios}.json', 'w') as archivo:
+            with open(f'output/datos_{numeros_aleatorios}.json', 'w') as archivo:
                 json.dump(datos, archivo, indent=4)
+
+        if args.save == 'txt':
+            numeros_aleatorios = [random.randint(1, 9000) for _ in range(1)]
+            with open(f'output/datos_{numeros_aleatorios}.txt', 'w') as archivo:
+                for clave, valor in datos.items():
+                    archivo.write(f'{clave}: {valor}\n')
     except:
         print(f'\n{Fore.RED}[ERROR]: No se han podido obtener resultados con el país: {Fore.BLUE}{random_entry[1]} - {random_entry[0]}')
-        print(f'{Fore.RESET}[~] Intentando de nuevo...')
         time.sleep(2)
-        main()
+        exit()
 
 # En caso de utilizar un codigo iso personalizado.
 def search_alternativo(bestrandom_url, headers, codigo):
@@ -100,10 +106,16 @@ def search_alternativo(bestrandom_url, headers, codigo):
                         datos[campos[i]] = texto.strip()
                         
         print_rich(f'\n[bold] {datos}')
-        if args.save:
+        if args.save == 'json':
             numeros_aleatorios = [random.randint(1, 9000) for _ in range(1)]
-            with open(f'datos_{numeros_aleatorios}.json', 'w') as archivo:
+            with open(f'output/datos_{numeros_aleatorios}.json', 'w') as archivo:
                 json.dump(datos, archivo, indent=4)
+
+        if args.save == 'txt':
+            numeros_aleatorios = [random.randint(1, 9000) for _ in range(1)]
+            with open(f'output/datos_{numeros_aleatorios}.txt', 'w') as archivo:
+                for clave, valor in datos.items():
+                    archivo.write(f'{clave}: {valor}\n')
     except:
         print(f'\n{Fore.RED}[ERROR]: No se han podido obtener resultados con el codigo: {Fore.BLUE}{codigo}')
         time.sleep(2)
@@ -113,7 +125,7 @@ def main():
     clear()
     print_rich(rainbow(logo))
 
-    if args.code:
+    if args.code != 'random':
         codigo = args.code
         bestrandom_url = f'https://www.bestrandoms.com/random-address-in-{codigo}?quantity=1'
 
@@ -126,14 +138,16 @@ def main():
             BarColumn(),
             TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
         ) as progress:
-            task = progress.add_task(f"[bold yellow] Buscando informacion... Codigo: {codigo}.", total=100)
+            task = progress.add_task(f"[bold yellow] Buscando informacion... Codigo: {codigo}, Cantidad: {args.quantity}.", total=100)
 
             while not progress.finished:
                 time.sleep(0.02)
                 progress.update(task, advance=1)
-        search_alternativo(bestrandom_url, headers, codigo)
 
-    else:
+        for _ in range(args.quantity):
+            search_alternativo(bestrandom_url, headers, codigo)
+
+    if args.code == 'random':
         csv_url = "https://gist.githubusercontent.com/tadast/8827699/raw/61b2107766d6fd51e2bd02d9f78f6be081340efc/countries_codes_and_coordinates.csv"
 
         resp = requests.get(csv_url)
@@ -158,12 +172,20 @@ def main():
             BarColumn(),
             TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
         ) as progress:
-            task = progress.add_task(f"[bold yellow] Buscando informacion... Pais: {random_entry[1]}, Codigo: {random_entry[0]}.", total=100)
+            task = progress.add_task(f"[bold yellow] Buscando informacion... Pais: {random_entry[1]}, Codigo: {random_entry[0]}, Cantidad: {args.quantity}.", total=100)
 
             while not progress.finished:
                 time.sleep(0.02)
                 progress.update(task, advance=1)
-        search_principal(bestrandom_url, headers, random_entry)
+        
+        for _ in range(args.quantity):
+            search_principal(bestrandom_url, headers, random_entry)
 
-if __name__ == '__main__':
+if not args.code:
+    print(f'''{Fore.RED}[!] ERROR: Debes agregar algun argumento: 
+      -code, -c          Añadir codigo ISO personalizado.
+      -quantity, -q         Añadir cantidad de resultados.
+      -save            Guardar datos en un archivo json.
+    ''')
+else:
     main()
